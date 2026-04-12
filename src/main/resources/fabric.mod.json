@@ -9,6 +9,8 @@
 		"ai"
 	],
 	"contact": {
+		"issues": "https://github.com/tamepokl-CN/scwy/issues",
+		"sources": "https://github.com/tamepokl-CN/scwy"
 	},
 	"license": "LGPLv3",
 	"icon": "assets/scwy/icon.png",
