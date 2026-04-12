@@ -1,0 +1,21 @@
+{
+	"required": true,
+	"package": "tamepokl.scwy.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"MultiPlayerGameModeMixin",
+		"ContainerMixin",
+		"litematicahelper.AbstractContainerMenuMixin",
+		"litematicahelper.MaterialListHudRendererAccessor",
+		"litematicahelper.SelectionManagerMixin",
+		"litematicahelper.TaskCountBlocksAreaMixin",
+		"litematicahelper.TaskCountBlocksPlacementMixin",
+		"LocalPlayerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

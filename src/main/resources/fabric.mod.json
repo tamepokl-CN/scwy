@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "scwy",
+	"version": "${version}",
+	"name": "scwy",
+	"description": "适用于scwy服务器的mod",
+	"authors": [
+		"tamepokl_CN",
+		"ai"
+	],
+	"contact": {
+	},
+	"license": "LGPLv3",
+	"icon": "assets/scwy/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"tamepokl.scwy.Scwy"
+		],
+		"modmenu": [
+			"tamepokl.scwy.compat.ModMenuImpl"
+		]
+	},
+	"mixins": [
+		"scwy.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"malilib": "*",
+		"tweakermore": "*",
+		"litematica": "*",
+		"itemscroller": "*"
+	},
+	"accessWidener": "scwy.accesswidener"
+}
