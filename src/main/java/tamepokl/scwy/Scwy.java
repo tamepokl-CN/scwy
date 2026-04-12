@@ -6,6 +6,5 @@ public class Scwy implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
-
 	}
 }
