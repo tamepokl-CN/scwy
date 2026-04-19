@@ -1,42 +1,36 @@
 package tamepokl.scwy.tool;
 
+import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.IKeybindManager;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import tamepokl.scwy.Reference;
+import tamepokl.scwy.config.ConfigToolGui;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ToolManager {
-
-
-    public static final List<Tool.EventRegisterEntry<?>> REGISTER_EVENT = new ArrayList<>();
-    public static final List<Tool> TOOLS = new ArrayList<>();
+    public static final List<ToolBase> TOOLS = new ArrayList<>();
     public static final String KEY_CATEGORY = "scwy.hotkeys.category.general";
+    private static boolean hasInit = false;
 
     public static void init() {
         try {
+            //所有需要被加载的tool
             Class.forName("tamepokl.scwy.tool.MaceKill");
-//          Class.forName("tamepokl.scwy.tool.Test");
-//          Class.forName("tamepokl.scwy.tool.TPBuild");
-            Class.forName("tamepokl.scwy.tool.autoFill.AutoFill");
-            Class.forName("tamepokl.scwy.tool.LitematicaHelper");
-            Class.forName("tamepokl.scwy.tool.Autolt");
-            Class.forName("tamepokl.scwy.tool.AutoCollect");
-            Class.forName("tamepokl.scwy.tool.CloseContainer");
-            Class.forName("tamepokl.scwy.tool.Tool1");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        hasInit = true;
     }
-
-    public static List<ToolConfig> getToolConfigList() {
-        init();
-        return TOOLS.stream().map(Tool::getToolConfig).toList();
+//获取配置列表
+    public static List<IHotkeyTogglable> getConfigList() {
+        if (!hasInit) {
+            init();
+        }
+        return TOOLS.stream().map(ToolBase::getConfig).toList();
     }
 
     public static void addKeysToMap(IKeybindManager manager) {
@@ -46,39 +40,43 @@ public class ToolManager {
     public static void addHotkeys(IKeybindManager manager) {
         manager.addHotkeysForCategory(Reference.MOD_NAME, KEY_CATEGORY, getHotkeys());
     }
-
+//获取热键
     private static List<IHotkey> getHotkeys() {
         List<IHotkey> hotkeys = new ArrayList<>();
-        getToolConfigList().forEach(toolConfig -> {
-            hotkeys.add(toolConfig.getToolGuiConfig());
-            toolConfig.children.forEach(base -> {
-                if (base instanceof IHotkey) hotkeys.add((IHotkey) base);
-            });
+
+        getConfigList().forEach(config->{
+            hotkeys.add(config);
+            if(config instanceof ConfigToolGui tool){
+                tool.getChildren().forEach(child->{
+                    if(child instanceof IHotkey hotkey) hotkeys.add(hotkey);
+                });
+            }
         });
         return hotkeys;
+    }
+    //获取children
+    public static List<IConfigBase> getChildrenConfig(){
+        List<IConfigBase> children = new ArrayList<>(List.of());
+        getConfigList().forEach(config->{
+            if(config instanceof ConfigToolGui tool){
+                children.addAll(tool.children);
+            }
+        });
+        return children;
     }
 
     private static List<IKeybind> getKeybind() {
         return getHotkeys().stream().map(IHotkey::getKeybind).toList();
     }
 
-    public static void addTool(Tool tool) {
+    public static void addTool(ExpandableTool tool) {
         TOOLS.add(tool);
     }
 
     public static void initTools() {
-        registerEvent();
-        TOOLS.forEach(Tool::init);
+        TOOLS.forEach(ToolBase::init);
     }
 
-    public static void registerEvent() {
-        for (Tool.EventRegisterEntry entry : REGISTER_EVENT) {
-            entry.getEvent().register(entry.getCallback());
-        }
-        for (Tool tool : TOOLS) {
-            ClientTickEvents.END_CLIENT_TICK.register(tool::onTick0);
-        }
-    }
 
 
 }

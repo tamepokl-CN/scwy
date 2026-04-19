@@ -28,8 +28,11 @@ import tamepokl.scwy.config.Configs;
 
 
 //ai写的
-//也许参考了wuhuclient
+//参考了wuhuclient
+//https://github.com/zhaixianyu/wuhu-client/blob/1.X/src/main/java/com/zxy/wuhuclient/Utils/HighlightBlockRenderer.java
 public class HighlightBlockRenderer implements IRenderer {
+    public static final int MAX_COUNT = 1000;
+    public static final double MAX_RENDER_DISTANCE = 64.0;
     public static HighlightBlockRenderer instance = new HighlightBlockRenderer();
     private static final float LINE_WIDTH = 4.0f;
 
@@ -92,7 +95,6 @@ public class HighlightBlockRenderer implements IRenderer {
 
 
 
-    // 渲染实心填充（优化：只渲染外露面）
     public void renderSolid(Color4f defaultColor, Set<BlockPos> posSet, Map<BlockPos, Color4f> colorMap){
         com.mojang.blaze3d.systems.RenderSystem.setShaderFog(com.mojang.blaze3d.systems.RenderSystem.getShaderFog());
         try (RenderContext ctx = new RenderContext(() -> threadName, MaLiLibPipelines.POSITION_COLOR_TRANSLUCENT_NO_DEPTH)) {
@@ -147,11 +149,6 @@ public class HighlightBlockRenderer implements IRenderer {
 
     @Override
     public void onRenderWorldLast(Matrix4f matrices, Matrix4f projMatrix){
-        // 检查高亮功能是否启用
-        // TODO: 检查高亮功能是否启用
-        // if (!Configs.Features.HIGHLIGHT_SETTINGS.getBooleanValue()) {
-        //     return;
-        // }
 
         // 更新高亮位置和颜色
         setMap.forEach((k, v) -> {
@@ -204,15 +201,12 @@ public class HighlightBlockRenderer implements IRenderer {
             return Set.of();
         }
 
-        double maxRenderDistance = 64.0; // TODO: 从配置中获取
-        int maxCount = 1000; // TODO: 从配置中获取
-
-        double maxDistanceSq = maxRenderDistance * maxRenderDistance;
+        double maxDistanceSq = MAX_RENDER_DISTANCE * MAX_RENDER_DISTANCE;
         var cameraPos = client.gameRenderer.getMainCamera().position();
         Set<BlockPos> filtered = new LinkedHashSet<>();
         
         for (BlockPos pos : posSet) {
-            if (filtered.size() >= maxCount) break;
+            if (filtered.size() >= MAX_COUNT) break;
             
             double dx = pos.getX() + 0.5 - cameraPos.x;
             double dy = pos.getY() + 0.5 - cameraPos.y;

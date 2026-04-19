@@ -72,6 +72,7 @@ public class WidgetConfigOptionScwy extends WidgetConfigOption {
 
     }
 
+    //有问题
     private void addCoordinateConfig(int y, int configWidth, IConfigBase config, ConfigCoordinate coordinate, int xAdj, int labelWidthAdj) {
         y += 1;
         int configHeight = 20;

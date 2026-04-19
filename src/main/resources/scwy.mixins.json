@@ -5,11 +5,6 @@
 	"mixins": [
 		"MultiPlayerGameModeMixin",
 		"ContainerMixin",
-		"litematicahelper.AbstractContainerMenuMixin",
-		"litematicahelper.MaterialListHudRendererAccessor",
-		"litematicahelper.SelectionManagerMixin",
-		"litematicahelper.TaskCountBlocksAreaMixin",
-		"litematicahelper.TaskCountBlocksPlacementMixin",
 		"LocalPlayerMixin"
 	],
 	"injectors": {

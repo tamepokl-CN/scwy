@@ -11,12 +11,10 @@ import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import tamepokl.scwy.Reference;
 import tamepokl.scwy.tool.ToolManager;
-import tamepokl.scwy.tool.ToolConfig;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -87,17 +85,17 @@ public class Configs implements IConfigHandler {
         public static final ImmutableList<IConfigBase> CHILDREN;
 
         static {
-            List<ToolConfig> tools = ToolManager.getToolConfigList();
-            Collection<IConfigBase> children = tools.stream().flatMap(toolConfig -> toolConfig.children.stream()).toList();
-//            Collection<ToolGuiConfig> top = tools.stream().map(ToolConfig::getToolGuiConfig).toList();
-            Collection<ConfigToolGui> top = tools.stream().map(ToolConfig::getToolGuiConfig).toList();
+//            List<ToolConfig> tools = ToolManager.getToolConfigList();
+//            Collection<IConfigBase> children = tools.stream().flatMap(toolConfig -> toolConfig.children.stream()).toList();
+//           Collection<ToolGuiConfig> top = tools.stream().map(ToolConfig::getToolGuiConfig).toList();
+//            Collection<ConfigToolGui> top = tools.stream().map(ToolConfig::getToolGuiConfig).toList();
 
             OPTIONS = ImmutableList.<IConfigBase>builder()
-                    .addAll(top)
-                    .addAll(children)
+                    .addAll(ToolManager.getConfigList())
+                    .addAll(ToolManager.getChildrenConfig())
                     .build();
-            TOP_LEVEL = ImmutableList.copyOf(top);
-            CHILDREN = ImmutableList.copyOf(children);
+            TOP_LEVEL = ImmutableList.copyOf(ToolManager.getConfigList());
+            CHILDREN = ImmutableList.copyOf(ToolManager.getChildrenConfig());
         }
         public static boolean isChildConfig(IConfigBase config) {
             return CHILDREN.contains(config);
