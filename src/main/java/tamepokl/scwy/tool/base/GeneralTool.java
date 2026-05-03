@@ -1,7 +1,6 @@
-package tamepokl.scwy.tool;
+package tamepokl.scwy.tool.base;
 
 import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
-import tamepokl.scwy.utils.ConfigUtils;
 
 public class GeneralTool extends ToolBase<ConfigBooleanHotkeyed> {
     public GeneralTool(String name) {

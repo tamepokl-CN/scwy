@@ -1,9 +1,9 @@
-package tamepokl.scwy.tool;
+package tamepokl.scwy.tool.base;
 
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
-import fi.dy.masa.malilib.config.options.ConfigBooleanHotkeyed;
 
 public class ToolBase<T extends IHotkeyTogglable> {
+
     public T config;
     public String name;
     public boolean isEnabled(){

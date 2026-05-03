@@ -1,4 +1,4 @@
-package tamepokl.scwy.tool;
+package tamepokl.scwy.tool.base;
 
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
@@ -6,7 +6,7 @@ import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.IKeybindManager;
 import tamepokl.scwy.Reference;
-import tamepokl.scwy.config.ConfigToolGui;
+import tamepokl.scwy.config.ToolConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ public class ToolManager {
         try {
             //所有需要被加载的tool
             Class.forName("tamepokl.scwy.tool.MaceKill");
+            Class.forName("tamepokl.scwy.tool.CloseContainer");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +47,7 @@ public class ToolManager {
 
         getConfigList().forEach(config->{
             hotkeys.add(config);
-            if(config instanceof ConfigToolGui tool){
+            if(config instanceof ToolConfig tool){
                 tool.getChildren().forEach(child->{
                     if(child instanceof IHotkey hotkey) hotkeys.add(hotkey);
                 });
@@ -58,7 +59,7 @@ public class ToolManager {
     public static List<IConfigBase> getChildrenConfig(){
         List<IConfigBase> children = new ArrayList<>(List.of());
         getConfigList().forEach(config->{
-            if(config instanceof ConfigToolGui tool){
+            if(config instanceof ToolConfig tool){
                 children.addAll(tool.children);
             }
         });

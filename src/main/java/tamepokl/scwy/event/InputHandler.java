@@ -8,7 +8,7 @@ import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.Minecraft;
 import tamepokl.scwy.config.Configs;
 import tamepokl.scwy.gui.GuiConfigs;
-import tamepokl.scwy.tool.ToolManager;
+import tamepokl.scwy.tool.base.ToolManager;
 
 import static tamepokl.scwy.Reference.MOD_NAME;
 

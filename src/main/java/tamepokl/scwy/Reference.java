@@ -11,5 +11,4 @@ public class Reference {
     public static final String MOD_NAME = "scwy";
     public static final String MOD_VERSION = StringUtils.getModVersionString(MOD_ID);
     public static final String MC_VERSION = SharedConstants.getCurrentVersion().id();
-    public static final Boolean DEBUG = false;
 }

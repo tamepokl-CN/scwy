@@ -8,14 +8,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tamepokl.scwy.tool.CloseContainer;
 
-//从tweakermore借鉴
 @Mixin(AbstractContainerMenu.class)
 public class ContainerMixin {
     @Inject(method = "initializeContents", at = @At("TAIL"))
     private void containerProcessorProcess(CallbackInfo ci)
     {
-
-
+        AbstractContainerMenu menu = (AbstractContainerMenu)(Object)this;
+        CloseContainer.INSTANCE.onContainerOpen(ci , menu);
     }
 }

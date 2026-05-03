@@ -10,7 +10,7 @@ import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import tamepokl.scwy.Reference;
-import tamepokl.scwy.tool.ToolManager;
+import tamepokl.scwy.tool.base.ToolManager;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -119,11 +119,6 @@ public class Configs implements IConfigHandler {
         }
 
         private static void init() {
-            try {
-                Class.forName("tamepokl.scwy.tool.Autolt");
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
         }
         public static void addExtra(IConfigBase base){
             CONFIG.add(base);

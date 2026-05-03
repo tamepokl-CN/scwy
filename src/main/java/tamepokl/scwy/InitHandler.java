@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import tamepokl.scwy.config.Configs;
 import tamepokl.scwy.event.InputHandler;
 import tamepokl.scwy.gui.GuiConfigs;
-import tamepokl.scwy.tool.ToolManager;
+import tamepokl.scwy.tool.base.ToolManager;
 import tamepokl.scwy.utils.HighlightBlockRenderer;
 
 import static tamepokl.scwy.Reference.*;
@@ -24,7 +24,7 @@ public class InitHandler implements IInitializationHandler {
         InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
         ToolManager.initTools();
         ConfigManager.getInstance().registerConfigHandler(MOD_ID, new Configs());
-        HighlightBlockRenderer.instance.init();
+        HighlightBlockRenderer.init();
 
 
 

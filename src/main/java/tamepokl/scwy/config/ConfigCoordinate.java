@@ -6,7 +6,7 @@ import fi.dy.masa.malilib.config.options.ConfigBase;
 import fi.dy.masa.malilib.config.ConfigType;
 import fi.dy.masa.malilib.config.IStringRepresentable;
 import fi.dy.masa.malilib.util.StringUtils;
-
+@Deprecated
 public class ConfigCoordinate extends ConfigBase<ConfigCoordinate> implements IStringRepresentable {
     protected int x;
     protected int y;

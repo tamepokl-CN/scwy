@@ -13,29 +13,30 @@ import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.InfoUtils;
+import fi.dy.masa.malilib.util.StringUtils;
 import fi.dy.masa.malilib.util.data.Color4f;
-import tamepokl.scwy.Reference;
+import org.jspecify.annotations.NonNull;
 import tamepokl.scwy.utils.ConfigUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class ConfigToolGui extends ConfigBoolean implements ExpandableConfig , IHotkeyTogglable {
+public class ToolConfig extends ConfigBoolean implements ExpandableConfig , IHotkeyTogglable {
 
     public final List<IConfigBase> children = new ArrayList<>();
     private boolean expanded;
     private final IKeybind keybind;
 
-    public ConfigToolGui(String name, boolean defaultValue) {
+    public ToolConfig(String name, boolean defaultValue) {
         this(name, defaultValue, "");
     }
 
-    public ConfigToolGui(String name, boolean defaultValue, String defaultHotKey) {
+    public ToolConfig(String name, boolean defaultValue, String defaultHotKey) {
         super(name, defaultValue);
         this.keybind = KeybindMulti.fromStorageString(defaultHotKey, KeybindSettings.DEFAULT);
-        this.keybind.setCallback(this::onToggle);
-    }
+        this.keybind.setCallback(this::onToggle);    }
     @Override
     public IKeybind getKeybind() {
         return this.keybind;
@@ -99,72 +100,84 @@ public class ConfigToolGui extends ConfigBoolean implements ExpandableConfig , I
         return obj;
     }
 
+    @Override
+    public String getComment() {
+            return StringUtils.getTranslatedOrFallback(this.comment, StringUtils.splitCamelCase(this.getName()) + " Comment?");
+    }
+
     //便捷方法，用于快速创建配置
 
-    public IConfigBase ofBase(ConfigBase<? extends IConfigBase> base) {
+    public IConfigBase ofBase(@NonNull ConfigBase<? extends IConfigBase> base) {
         IConfigBase apply = ConfigUtils.apply(base);
         addChild(apply);
         return apply;
     }
 
     public ConfigBoolean ofBoolean(String name) {
-        return (ConfigBoolean) ofBase(new ConfigBoolean(name, false));
+        return (ConfigBoolean) ofBase(new ConfigBoolean(namePrefix(name), false));
     }
 
     public ConfigBoolean ofBoolean(String name, Boolean defaultValue) {
-        return (ConfigBoolean) ofBase(new ConfigBoolean(name, defaultValue));
+        return (ConfigBoolean) ofBase(new ConfigBoolean(namePrefix(name), defaultValue));
     }
 
-    public ConfigBooleanHotkeyed ofBooleanHotkeyed(String name, String defaultHotkey) {
-        ConfigBooleanHotkeyed config = new ConfigBooleanHotkeyed(name, false, defaultHotkey);
+    public ConfigBooleanHotkeyed ofBooleanHotkeyed(String name, String defaultHotkey,Boolean defaultValue) {
+        ConfigBooleanHotkeyed config = new ConfigBooleanHotkeyed(namePrefix(name), defaultValue, defaultHotkey);
         config.getKeybind().setCallback((action, key) -> {
             config.toggleBooleanValue();
             return true;
         });
         return (ConfigBooleanHotkeyed) ofBase(config);
     }
+    public ConfigBooleanHotkeyed ofBooleanHotkeyed(String name, String defaultHotkey) {
+        return ofBooleanHotkeyed(name, defaultHotkey,false);
+    }
 
     public ConfigColor ofColor(String name, String defaultValue) {
-        return (ConfigColor) ofBase(new ConfigColor(name, defaultValue));
+        return (ConfigColor) ofBase(new ConfigColor(namePrefix(name), defaultValue));
     }
 
     public ConfigColorList ofColorList(String name, ImmutableList<Color4f> defaultValue) {
-        return (ConfigColorList) ofBase(new ConfigColorList(name, defaultValue));
+        return (ConfigColorList) ofBase(new ConfigColorList(namePrefix(name), defaultValue));
     }
 
     public ConfigDouble ofDouble(String name, double defaultValue, double minValue, double maxValue) {
-        return (ConfigDouble) ofBase(new ConfigDouble(name, defaultValue, minValue, maxValue));
+        return (ConfigDouble) ofBase(new ConfigDouble(namePrefix(name), defaultValue, minValue, maxValue));
     }
 
     public ConfigFloat ofFloat(String name, float defaultValue, float minValue, float maxValue) {
-        return (ConfigFloat) ofBase(new ConfigFloat(name, defaultValue, minValue, maxValue));
+        return (ConfigFloat) ofBase(new ConfigFloat(namePrefix(name), defaultValue, minValue, maxValue));
     }
 
     public ConfigHotkey ofHotkey(String name, String defaultHotkey) {
-        return (ConfigHotkey) ofBase(new ConfigHotkey(name, defaultHotkey));
+        return (ConfigHotkey) ofBase(new ConfigHotkey(namePrefix(name), defaultHotkey));
     }
 
     public ConfigInteger ofInteger(String name, int defaultValue, int minValue, int maxValue) {
-        return (ConfigInteger) ofBase(new ConfigInteger(name, defaultValue, minValue, maxValue));
+        return (ConfigInteger) ofBase(new ConfigInteger(namePrefix(name), defaultValue, minValue, maxValue));
     }
 
     public ConfigLockedList ofLockedList(String name, IConfigLockedListType handler) {
-        return (ConfigLockedList) ofBase(new ConfigLockedList(name, handler));
+        return (ConfigLockedList) ofBase(new ConfigLockedList(namePrefix(name), handler));
     }
 
     public ConfigOptionList ofOptionList(String name, IConfigOptionListEntry defaultValue) {
-        return (ConfigOptionList) ofBase(new ConfigOptionList(name, defaultValue));
+        return (ConfigOptionList) ofBase(new ConfigOptionList(namePrefix(name), defaultValue));
     }
 
     public ConfigString ofString(String name, String defaultValue) {
-        return (ConfigString) ofBase(new ConfigString(name, defaultValue));
+        return (ConfigString) ofBase(new ConfigString(namePrefix(name), defaultValue));
     }
 
     public ConfigStringList ofStringList(String name, ImmutableList<String> defaultValue) {
-        return (ConfigStringList) ofBase(new ConfigStringList(name, defaultValue));
+        return (ConfigStringList) ofBase(new ConfigStringList(namePrefix(name), defaultValue));
     }
 
     public ConfigTriggerHotkey ofTriggerHotkey(String name, String defaultHotkey) {
-        return (ConfigTriggerHotkey) ofBase(new ConfigTriggerHotkey(name, defaultHotkey));
+        return (ConfigTriggerHotkey) ofBase(new ConfigTriggerHotkey(namePrefix(name), defaultHotkey));
+    }
+
+    private String namePrefix(String name){
+        return "%s_%s".formatted(this.getName(),name);
     }
 }
