@@ -19,6 +19,7 @@ public class MaceKill extends ExpandableTool {
     public final ConfigInteger HEIGHT = config.ofInteger("height", 1790, 0, 2000);
     public boolean isAttacking = false;
 
+
     static {
         addTool(INSTANCE);
     }

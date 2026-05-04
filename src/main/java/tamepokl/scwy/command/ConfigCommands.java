@@ -1,4 +1,5 @@
 package tamepokl.scwy.command;
 
-public class ClientCommands {
+public class ConfigCommands {
+
 }

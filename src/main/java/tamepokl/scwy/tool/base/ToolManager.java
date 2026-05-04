@@ -21,6 +21,7 @@ public class ToolManager {
             //所有需要被加载的tool
             Class.forName("tamepokl.scwy.tool.MaceKill");
             Class.forName("tamepokl.scwy.tool.CloseContainer");
+//            Class.forName("tamepokl.scwy.tool.CommandRedirect");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

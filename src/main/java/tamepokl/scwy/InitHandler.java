@@ -6,6 +6,7 @@ import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import fi.dy.masa.malilib.registry.Registry;
 import fi.dy.masa.malilib.util.data.ModInfo;
 import net.minecraft.client.Minecraft;
+import tamepokl.scwy.command.ScwyClientCommands;
 import tamepokl.scwy.config.Configs;
 import tamepokl.scwy.event.InputHandler;
 import tamepokl.scwy.gui.GuiConfigs;

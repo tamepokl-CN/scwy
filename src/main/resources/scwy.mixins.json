@@ -3,14 +3,19 @@
 	"package": "tamepokl.scwy.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"MultiPlayerGameModeMixin",
+		"ChatScreenMixin",
+		"ClientPacketListenerMixin",
 		"ContainerMixin",
-		"LocalPlayerMixin"
+		"LocalPlayerMixin",
+		"MultiPlayerGameModeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
 	},
 	"overwrites": {
 		"requireAnnotations": true
-	}
+	},
+	"client": [
+		"ClientCommandInternalsMixin"
+	]
 }
