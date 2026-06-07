@@ -5,9 +5,11 @@
 	"mixins": [
 		"ChatScreenMixin",
 		"ClientPacketListenerMixin",
+		"ConnectionMixin",
 		"ContainerMixin",
 		"LocalPlayerMixin",
-		"MultiPlayerGameModeMixin"
+		"MultiPlayerGameModeMixin",
+		"ServerGamePacketListenerImplMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

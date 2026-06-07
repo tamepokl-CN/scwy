@@ -6,9 +6,14 @@
   "scwy.config.tool.name.macekill": "重锤暴击",
   "scwy.config.tool.comment.macekill": "增大重锤的伤害\n可能只在Paper端上有效",
   "scwy.config.tool.name.macekill_packetcount": "包数量",
-  "scwy.config.tool.comment.macekill_packetcount": "4/17",
+  "scwy.config.tool.comment.macekill_packetcount": "17",
   "scwy.config.tool.name.macekill_height": "高度",
-  "scwy.config.tool.comment.macekill_height": "22/1790",
+  "scwy.config.tool.comment.macekill_height": "1790",
+  "scwy.config.tool.name.flyAbility": "飞行",
+  "scwy.config.tool.comment.flyAbility": "开启飞行能力(非创造时有效)",
+
+  "scwy.config.tool.name.homeCommandRedirect": "Home命令重定向",
+  "scwy.config.tool.comment.homeCommandRedirect": "将home tp改为home\nhome set改为sethome\nhome delete改为delhome\nhome list改为listome",
 
 
   "scwy.config.tool.name.closeContainer": "自动关闭界面",
@@ -54,5 +59,24 @@
   "scwy.config.tool.comment.closeContainer_ShulkerBoxMenu": "潜影盒",
   "scwy.config.tool.comment.closeContainer_SmithingMenu": "锻造台",
   "scwy.config.tool.comment.closeContainer_SmokerMenu": "烟熏炉",
-  "scwy.config.tool.comment.closeContainer_StonecutterMenu": "切石机"
+  "scwy.config.tool.comment.closeContainer_StonecutterMenu": "切石机",
+
+  "scwy.message.configEdit.edit.IBoolean": "已修改布尔值%s(%s)由%s到%s",
+  "scwy.message.configEdit.edit.IInteger": "已修改整数值%s(%s)由%s到%s",
+
+  "scwy.message.configEdit.edit.IDouble": "已修改Double值%s(%s)由%s到%s",
+
+  "scwy.message.configEdit.edit.IFloat": "已修改Float值%s(%s)由%s到%s",
+  "scwy.message.configEdit.edit.String": "已修改字符串值%s(%s)由%s到%s",
+
+  "scwy.message.configEdit.edit.Color": "已修改颜色%s(%s)由%s到%s",
+  "scwy.message.configEdit.edit.IOptionList": "已修改选择器%s(%s)由%s到%s",
+
+  "scwy.message.configEdit.remove.successful.StringList": "从%s(%s)删除了元素%s",
+  "scwy.message.configEdit.remove.failed.StringList": "从%s(%s)删除元素%s失败",
+  "scwy.message.configEdit.add.successful.StringList": "向%s(%s)添加了元素%s",
+  "scwy.message.configEdit.replace.failed.StringList": "从%s(%s)修改元素%s失败",
+  "scwy.message.configEdit.replace.successful.StringList": "从%s(%s)修改元素%s至%s",
+  "scwy.message.configEdit.trigger.triggered": "触发了%s(%s)",
+  "scwy.message.reset": "已重置%s(%s)"
 }
