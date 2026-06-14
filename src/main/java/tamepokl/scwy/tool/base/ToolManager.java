@@ -28,6 +28,8 @@ public class ToolManager {
             Class.forName("tamepokl.scwy.tool.FlyAbility");
 //            Class.forName("tamepokl.scwy.tool.PacketRecorder");
             Class.forName("tamepokl.scwy.tool.HomeCommandRedirectTool");
+            Class.forName("tamepokl.scwy.tool.NoCommandVerify");
+            Class.forName("tamepokl.scwy.tool.AutoUpdateTool");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -12,9 +12,13 @@
   "scwy.config.tool.name.flyAbility": "飞行",
   "scwy.config.tool.comment.flyAbility": "开启飞行能力(非创造时有效)",
 
+  "scwy.done": "§a操作完成",
   "scwy.config.tool.name.homeCommandRedirect": "Home命令重定向",
   "scwy.config.tool.comment.homeCommandRedirect": "将home tp改为home\nhome set改为sethome\nhome delete改为delhome\nhome list改为listome",
-
+  "scwy.config.tool.name.noCommandVerify": "不验证命令",
+  "scwy.config.tool.comment.noCommandVerify": "不验证列表指定的命令",
+  "scwy.config.tool.name.noCommandVerify_list": "命令列表",
+  "scwy.config.tool.comment.noCommandVerify_list": "不验证列表指定的命令",
 
   "scwy.config.tool.name.closeContainer": "自动关闭界面",
   "scwy.config.tool.name.closeContainer_AnvilMenu": "铁砧",
@@ -78,5 +82,22 @@
   "scwy.message.configEdit.replace.failed.StringList": "从%s(%s)修改元素%s失败",
   "scwy.message.configEdit.replace.successful.StringList": "从%s(%s)修改元素%s至%s",
   "scwy.message.configEdit.trigger.triggered": "触发了%s(%s)",
-  "scwy.message.reset": "已重置%s(%s)"
+  "scwy.message.reset": "已重置%s(%s)",
+
+
+  "scwy.home.empty": "§c家的列表为空，可能你未保存家，或者程序出现问题",
+  "scwy.home.askHomeList": "§7<§e点击这里重新获取家的列表§7>",
+  "scwy.home.reinject.fail": "§c\"Home命令\"注入失败",
+  "scwy.home.timeout": "§c家列表获取超时",
+
+  "scwy.update.failed": "§c连接Github失败",
+  "scwy.update.available": "新版本更新:%s\n发布时间:%s\nChangelog:\n%s",
+  "scwy.update.none": "§a当前版本为最新版本",
+  "scwy.update.updateNow": "§7<§e立刻更新§7>",
+  "scwy.update.ignore": "§7<§e忽略这个版本§7>",
+  "scwy.update.show": "§7<§e查看Release界面§7>",
+  "scwy.update.success": "更新完成，请手动删除旧版本文件，重启客户端应用更新",
+  "scwy.update.updatefailed": "§c更新失败:%s",
+  "scwy.update.downloading": "下载进度:%d",
+  "scwy.update.showfile": "§7<§a打开mod文件夹§7>"
 }

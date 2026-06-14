@@ -11,6 +11,7 @@ import tamepokl.scwy.config.Configs;
 import tamepokl.scwy.event.InputHandler;
 import tamepokl.scwy.gui.GuiConfigs;
 import tamepokl.scwy.tool.base.ToolManager;
+import tamepokl.scwy.utils.FileUtils;
 import tamepokl.scwy.utils.HighlightBlockRenderer;
 
 import static tamepokl.scwy.Reference.*;
@@ -26,6 +27,7 @@ public class InitHandler implements IInitializationHandler {
         ToolManager.initTools();
         ConfigManager.getInstance().registerConfigHandler(MOD_ID, new Configs());
         HighlightBlockRenderer.init();
+        FileUtils.init();
 
 
 

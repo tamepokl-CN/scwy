@@ -17,7 +17,7 @@ public class PacketRecorder extends ExpandableTool {
     public static final String S2C = GREEN + "S2C" + RESET;
     public static final String C2S = RED + "C2S" + RESET;
     static {
-        ToolManager.addTool(INSTANCE);
+//        ToolManager.addTool(INSTANCE);
     }
     public PacketRecorder(String name) {
         super(name);

@@ -56,47 +56,51 @@ public class ConfigEditor {
     public static LiteralArgumentBuilder<FabricClientCommandSource> builder = literal("configedit");
     public static final List<Mod> mods = new ArrayList<>();
     public static void init() {
-        for (Mod mod : mods) {
-            builder.then(mod.builder);
-        }
+//        for (Mod mod : mods) {
+//            builder.then(mod.builder);
+//        }
 
     }
     static {
-        mods.add(new Mod("scwy")
-                .addTab(new Tab("tool")
-                        .addConfigList(ToolManager.getConfigList())));
-        mods.add(new Mod("tweakeroo")
-                .addTab(new Tab("tweaks")
-                        .addConfigList(GuiConfigs.TWEAK_LIST))
-                .addTab(new Tab("generic")
-                        .addConfigList(Configs.Generic.OPTIONS))
-                .addTab(new Tab("fixes")
-                        .addConfigList(Configs.Fixes.OPTIONS))
-                .addTab(new Tab("disable")
-                        .addConfigList(Configs.Disable.OPTIONS))
-                .addTab(new Tab("internal")
-                        .addConfigList(Configs.Internal.OPTIONS))
-                .addTab(new Tab("lists")
-                        .addConfigList(Configs.Lists.OPTIONS)));
-        mods.add(new Mod("litematica")
-                .addTab(new Tab("colors")
-                        .addConfigList(fi.dy.masa.litematica.config.Configs.Colors.OPTIONS))
-                .addTab(new Tab("generic")
-                        .addConfigList(fi.dy.masa.litematica.config.Configs.Generic.OPTIONS))
-                .addTab(new Tab("visuals")
-                        .addConfigList(fi.dy.masa.litematica.config.Configs.Visuals.OPTIONS))
-                .addTab(new Tab("infoOverlays")
-                        .addConfigList(fi.dy.masa.litematica.config.Configs.InfoOverlays.OPTIONS)));
-        mods.add(new Mod("itemscroller")
-                .addTab(new Tab("generic")
-                        .addConfigList(fi.dy.masa.itemscroller.config.Configs.Generic.OPTIONS))
-                .addTab(new Tab("toggles")
-                        .addConfigList(fi.dy.masa.itemscroller.config.Configs.Toggles.OPTIONS)));
-        mods.add(new Mod("minuhud")
-                .addTab(new Tab("generic")
-                        .addConfigList(fi.dy.masa.minihud.config.Configs.Generic.OPTIONS))
-                .addTab(new Tab("colors")
-                        .addConfigList(fi.dy.masa.minihud.config.Configs.Colors.OPTIONS)));
+//        ScwyClientCommands.addToScwy(builder);
+    }
+    static {
+
+//        mods.add(new Mod("scwy")
+//                .addTab(new Tab("tool")
+//                        .addConfigList(ToolManager.getConfigList())));
+//        mods.add(new Mod("tweakeroo")
+//                .addTab(new Tab("tweaks")
+//                        .addConfigList(GuiConfigs.TWEAK_LIST))
+//                .addTab(new Tab("generic")
+//                        .addConfigList(Configs.Generic.OPTIONS))
+//                .addTab(new Tab("fixes")
+//                        .addConfigList(Configs.Fixes.OPTIONS))
+//                .addTab(new Tab("disable")
+//                        .addConfigList(Configs.Disable.OPTIONS))
+//                .addTab(new Tab("internal")
+//                        .addConfigList(Configs.Internal.OPTIONS))
+//                .addTab(new Tab("lists")
+//                        .addConfigList(Configs.Lists.OPTIONS)));
+//        mods.add(new Mod("litematica")
+//                .addTab(new Tab("colors")
+//                        .addConfigList(fi.dy.masa.litematica.config.Configs.Colors.OPTIONS))
+//                .addTab(new Tab("generic")
+//                        .addConfigList(fi.dy.masa.litematica.config.Configs.Generic.OPTIONS))
+//                .addTab(new Tab("visuals")
+//                        .addConfigList(fi.dy.masa.litematica.config.Configs.Visuals.OPTIONS))
+//                .addTab(new Tab("infoOverlays")
+//                        .addConfigList(fi.dy.masa.litematica.config.Configs.InfoOverlays.OPTIONS)));
+//        mods.add(new Mod("itemscroller")
+//                .addTab(new Tab("generic")
+//                        .addConfigList(fi.dy.masa.itemscroller.config.Configs.Generic.OPTIONS))
+//                .addTab(new Tab("toggles")
+//                        .addConfigList(fi.dy.masa.itemscroller.config.Configs.Toggles.OPTIONS)));
+//        mods.add(new Mod("minuhud")
+//                .addTab(new Tab("generic")
+//                        .addConfigList(fi.dy.masa.minihud.config.Configs.Generic.OPTIONS))
+//                .addTab(new Tab("colors")
+//                        .addConfigList(fi.dy.masa.minihud.config.Configs.Colors.OPTIONS)));
 //        mods.add(new Mod("tweakermore")
 //                .addTab(new Tab("option")
 //                        .addConfigList(TweakerMoreConfigs.getAllOptions().stream().map(TweakerMoreOption::getConfig).toList())));

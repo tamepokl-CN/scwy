@@ -10,8 +10,12 @@ import tamepokl.scwy.tool.FlyAbility;
 
 public class FakeCreative {
     public static final LiteralArgumentBuilder<FabricClientCommandSource> creativeBuilder = ClientCommandManager.literal("fakeCreative").executes(context -> setCreativeGamemode(Minecraft.getInstance()));
-
     public static final LiteralArgumentBuilder<FabricClientCommandSource> survivalBuilder = ClientCommandManager.literal("fakeSurvival").executes(context -> setSurvivalGamemode(Minecraft.getInstance()));
+
+    static {
+        ScwyClientCommands.addToScwy(creativeBuilder);
+        ScwyClientCommands.addToScwy(survivalBuilder);
+    }
     private static int setCreativeGamemode(Minecraft client) {
         if (client.player != null) {
             client.gameMode.setLocalMode(GameType.CREATIVE);
@@ -24,7 +28,7 @@ public class FakeCreative {
         }
         return 1;
     }
-        private static int setSurvivalGamemode(Minecraft client) {
+    private static int setSurvivalGamemode(Minecraft client) {
             if (client.player != null) {
                 client.gameMode.setLocalMode(GameType.SURVIVAL);
 //                client.player.playerInfo.setGameMode(GameType.CREATIVE);

@@ -10,4 +10,5 @@ public class ChatScreenMixin {
 //    @ModifyVariable(method = "handleChatInput", at = @At("HEAD"), argsOnly = true)
 //    private String modifyCommandString(String string2) {
 //    }
+
 }

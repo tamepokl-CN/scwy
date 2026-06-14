@@ -14,12 +14,15 @@ repositories {
 		name "fallensMaven"
 		url "https://maven.fallenbreath.me/releases"
 	}
-	repositories {
-		maven {
-			name = "Modrinth"
-			url = "https://api.modrinth.com/maven"
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
 		}
 	}
+
+
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
@@ -51,6 +54,25 @@ dependencies {
 	}
 
 	modCompileOnly( "maven.modrinth:modmenu:17.0.0-beta.2-1.21.11")
+
+	include implementation('io.seruco.encoding:base62:0.1.3'){
+		repositories {
+			mavenCentral()
+		}
+	}
+
+	include implementation("com.tamepokl:releasechecker:1.0.2:all"){
+		repositories {
+			maven {
+				url 'https://maven.pkg.github.com/tamepokl-CN/ReleaseChecker'
+				credentials {
+					username System.getenv('GH_USERNAME')
+					password System.getenv('GH_TOKEN')
+				}
+			}
+		}
+	}
+
 	
 }
 

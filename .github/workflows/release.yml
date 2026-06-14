@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 jobs:
   publish:
@@ -27,6 +28,9 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: build
+        env:
+          GH_USERNAME: ${{ github.actor }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew build
 
       - name: Release
