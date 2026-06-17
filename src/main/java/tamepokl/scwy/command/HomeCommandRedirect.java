@@ -7,7 +7,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.context.StringRange;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -18,7 +17,6 @@ import io.seruco.encoding.base62.Base62;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.ClientSuggestionProvider;
@@ -33,7 +31,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tamepokl.scwy.Reference;
 import tamepokl.scwy.tool.base.ToolManager;
+import tamepokl.scwy.utils.ScwyUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -41,15 +41,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
-import static tamepokl.scwy.tool.HomeCommandRedirectTool.enable;
-import static tamepokl.scwy.utils.CommandUtils.sendCommand;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import tamepokl.scwy.utils.ScwyUtils;
+import static tamepokl.scwy.tool.HomeCommandRedirectTool.enable;
+import static tamepokl.scwy.utils.CommandUtils.sendCommand;
 
 public class HomeCommandRedirect {
     public static LiteralArgumentBuilder<ClientSuggestionProvider> homebuilder;
@@ -143,7 +141,6 @@ public class HomeCommandRedirect {
     }
 
     public static boolean waitForSuggestions = false;
-    private static volatile int currentRequestId;
     private static final ScheduledExecutorService timeoutScheduler = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread t = new Thread(r, "scwy-home-suggestions-timeout");
         t.setDaemon(true);
@@ -168,10 +165,11 @@ public class HomeCommandRedirect {
     }
     //提示玩家重新获取家列表
     public static void noticeHomeList() {
-        MutableComponent component = Component.translatable("scwy.home.askHomeList").withStyle(ChatFormatting.YELLOW)
+        MutableComponent component = Component.translatable("scwy.home.askHomeList")
                 .withStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand("/scwy requesthomelist")));
         ScwyUtils.printMessage(component,false);
     }
+    private static final AtomicInteger requestIdCounter = new AtomicInteger(0);
 
     //请求家列表
     public static void askHomeList(){
@@ -183,9 +181,9 @@ public class HomeCommandRedirect {
             connection.getConnection().send(packet);
             waitForSuggestions = true;
         }
-        final long requestId = ++currentRequestId;
+        final long requestId = requestIdCounter.incrementAndGet();
         timeoutScheduler.schedule(() -> {
-            if (waitForSuggestions && currentRequestId == requestId) {
+            if (waitForSuggestions && requestIdCounter.get() == requestId) {
                 Reference.LOGGER.warn("Home list request timed out");
                 ScwyUtils.printTranslatableMessage("scwy.home.timeout",false);
                 noticeHomeList();
@@ -231,7 +229,6 @@ public class HomeCommandRedirect {
         }
     }
     public static String readString(StringReader reader){
-        int start = reader.getCursor();
         StringBuilder result = new StringBuilder();
 
         while (reader.canRead()) {
@@ -334,7 +331,7 @@ public class HomeCommandRedirect {
 
         MutableComponent result = Component.empty();
         int lastIndex = 0;
-        int currentIndex = 0;
+        int currentIndex;
 
         while ((currentIndex = text.indexOf(PREFIX, lastIndex)) != -1) {
             int suffixIndex = text.indexOf(SUFFIX, currentIndex + PREFIX.length());
@@ -379,7 +376,7 @@ public class HomeCommandRedirect {
 
 
         @Override
-        public String parse(StringReader reader) throws CommandSyntaxException {
+        public String parse(StringReader reader) {
             return readString(reader);
         }
 
@@ -404,7 +401,7 @@ public class HomeCommandRedirect {
         }
 
         @Override
-        public String parse(StringReader reader) throws CommandSyntaxException {
+        public String parse(StringReader reader) {
             // 没有校验长度是否超过，我想应该没必要
             return readString(reader);
         }

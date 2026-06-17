@@ -27,7 +27,6 @@ public class InitHandler implements IInitializationHandler {
         ToolManager.initTools();
         ConfigManager.getInstance().registerConfigHandler(MOD_ID, new Configs());
         HighlightBlockRenderer.init();
-        FileUtils.init();
 
 
 

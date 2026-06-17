@@ -90,6 +90,7 @@
   "scwy.home.reinject.fail": "§c\"Home命令\"注入失败",
   "scwy.home.timeout": "§c家列表获取超时",
 
+  "scwy.update.unignoretip": "§a使用指令/scwy update unignore取消忽略",
   "scwy.update.failed": "§c连接Github失败",
   "scwy.update.available": "新版本更新:%s\n发布时间:%s\nChangelog:\n%s",
   "scwy.update.none": "§a当前版本为最新版本",
@@ -99,5 +100,8 @@
   "scwy.update.success": "更新完成，请手动删除旧版本文件，重启客户端应用更新",
   "scwy.update.updatefailed": "§c更新失败:%s",
   "scwy.update.downloading": "下载进度:%d",
-  "scwy.update.showfile": "§7<§a打开mod文件夹§7>"
+  "scwy.update.showfile": "§7<§a打开mod文件夹§7>",
+  "scwy.update.start": "开始下载...",
+  "scwy.update.dev": "开发环境不能更新",
+  "scwy.update.disabled": "更新不可用！"
 }
